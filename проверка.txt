@@ -1,0 +1,24 @@
+SELECT 
+    a.id AS application_id,
+    a.fio,
+    GROUP_CONCAT(pl.name SEPARATOR ', ') AS languages
+FROM applications a
+LEFT JOIN application_languages al ON a.id = al.application_id
+LEFT JOIN programming_languages pl ON al.language_id = pl.id
+GROUP BY a.id, a.fio
+ORDER BY a.id;
+
+
+SELECT 
+    u.id AS user_id,
+    u.login,
+    u.password_hash,
+    a.id AS application_id,
+    a.fio,
+    a.phone,
+    a.email,
+    a.birthdate,
+    a.gender,
+    a.bio
+FROM users u
+JOIN applications a ON u.application_id = a.id;
